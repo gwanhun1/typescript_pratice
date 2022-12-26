@@ -1,16 +1,15 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import variables from "../../styles/variables";
-import "./chatting.css";
 import $ from "jquery";
 import io from "socket.io-client";
 const ChatBot = () => {
   const socket = io().connect();
   const [text, setText] = useState("");
-  const input = (e) => {
+  const input = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
-  const send = (event) => {
+  const send = (event: React.MouseEvent<HTMLDivElement>) => {
     //확인용(통신x)
     if (text.length > 0) {
       $("#messages").append("<li>user : " + text + "</li>");
@@ -61,7 +60,6 @@ const ChatBot = () => {
                 id="message"
                 type="text"
                 placeholder="Type your message..."
-                autocomplete="off"
                 onChange={input}
               />
               <input id="message-submit" type="submit" onClick={send} />
